@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: spring-boot-server-pod
+  name: customer-pod
   labels:
     environment: test
-    app: spring-boot-server
+    app: customer
 spec:
   containers:
-    - name: spring-boot-server
-      image: ghcr.io/your_username/spring-boot-example:latest
-  imagePullSecrets:
-    - name: regcred
+    - name: customercontainer
+      image: customerimage:latest
+#  imagePullSecrets:
+#    - name: regcred

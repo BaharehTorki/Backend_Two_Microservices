@@ -1,0 +1,21 @@
+version: "3"
+services:
+  customer-service:
+    depends_on:
+      - database-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app:/app
+  database-service:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=micro-db
+      - MYSQL_USER=micro-user
+      - MYSQL_PASSWORD=micro-password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - ./db_data:/var/lib/mysql

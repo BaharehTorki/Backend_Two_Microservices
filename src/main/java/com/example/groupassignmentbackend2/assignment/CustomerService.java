@@ -33,7 +33,7 @@ public class CustomerService {
         if (customer.equals(newCustomer)){
             return true;
         }else {
-            throw new NotSavedCustomerException();
+            throw new NotSavedCustomerException(String.format("there is not customer with id = %s", customer.getCustomerId()));
         }
     }
 
