@@ -1,1 +1,0 @@
-SELECT * FROM group-assignment-backend2.customer;

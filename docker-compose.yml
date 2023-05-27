@@ -2,20 +2,23 @@ version: "3"
 services:
   customer-service:
     depends_on:
-      - database-service
+      - db
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8081:8080
     volumes:
       - ./app:/app
-  database-service:
+  db:
     image: mysql:latest
     environment:
-      - MYSQL_DATABASE=micro-db
-      - MYSQL_USER=micro-user
-      - MYSQL_PASSWORD=micro-password
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    volumes:
-      - ./db_data:/var/lib/mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://db/micro-db?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: false
+      MYSQL_RANDOM_ROOT_PASSWORD: false
+    ports:
+      - 3308:3306
+

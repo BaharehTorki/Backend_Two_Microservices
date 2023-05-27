@@ -11,3 +11,4 @@ spec:
       image: customerimage:latest
 #  imagePullSecrets:
 #    - name: regcred
+
