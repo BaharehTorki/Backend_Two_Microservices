@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  # Data about the object
+  name: mysql
+  labels:
+    app: mysql
+    tier: db_tier
+spec:
+  containers:
+    - name: mysql
+      image: mysql:latest
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: micro_db
+
+
+#  imagePullSecrets:
+#    - name: regcred

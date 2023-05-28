@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Data about the object
+  name: customer-deployment
+  labels:
+    app: customer-app
+    type: back-end
+spec:
+  template:
+    metadata:
+      name: customer-pod
+      labels:
+        app: customer-app
+        type: back-end
+    spec:
+      containers:
+        - name: customer-container
+          image: ghcr.io/baharehtorki/customer:latest
+  replicas: 1
+  selector:
+    matchLabels:
+      type: back-end
