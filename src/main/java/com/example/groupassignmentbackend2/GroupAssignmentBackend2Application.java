@@ -18,7 +18,7 @@ public class GroupAssignmentBackend2Application {
         SpringApplication.run(GroupAssignmentBackend2Application.class, args);
     }
 
-    @Bean
+   /* @Bean
     public CommandLineRunner pojo(CustomerRepo customerRepo){
         return arg -> {
             customerRepo.save(new Customer("Anna", "897986596348795"));
@@ -35,6 +35,6 @@ public class GroupAssignmentBackend2Application {
             customerRepo.save(new Customer("Lion", "645647786587"));
             customerRepo.save(new Customer("Isak", "86787696796"));
         };
-    }
+    }*/
 
 }

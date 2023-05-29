@@ -1,4 +1,4 @@
-package com.example.groupassignmentbackend2.assignment;
+package com.example.groupassignmentbackend2.service;
 
 import com.example.groupassignmentbackend2.Model.Customer;
 import com.example.groupassignmentbackend2.Model.Purchases;
@@ -7,6 +7,7 @@ import com.example.groupassignmentbackend2.exception.NotFoundCustomerException;
 import com.example.groupassignmentbackend2.exception.NotSavedCustomerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +23,10 @@ public class CustomerService {
     @Autowired
     private CustomerRepo dao;
 
+    @Value("${PURCHASE_HOST}")
+    private String host;
+    @Value("${PURCHASE_BASE_URL}")
+    private String baseUrl;
 
     public CustomerService(CustomerRepo dao) {
         this.dao = dao;
@@ -45,20 +50,20 @@ public class CustomerService {
         }
     }
 
-    public Customer findCustomerById(Long id) throws NotFoundCustomerException {
+    public Customer findCustomerById(Long id) {
         Optional<Customer> customerById = dao.findById(id);
         if (customerById.isPresent()) {
             log.info("customer by id={} ", id);
             return customerById.get();
         } else {
-            throw new NotFoundCustomerException(String.format("There is not customer with id = %s", id));
+            log.info("No Customer found by id={}", id);
+            return null;
         }
     }
 
-    public List<Purchases> getAllOrdet(Long customerID) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/purchases/purchase/1";
-        Purchases[] objects = restTemplate.getForObject(url, Purchases[].class);
-        return Arrays.stream(objects).collect(Collectors.toList());
+
+    public void addOrder(Purchases purchases) {
+
+
     }
 }

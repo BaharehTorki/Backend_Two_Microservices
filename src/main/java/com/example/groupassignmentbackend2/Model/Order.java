@@ -12,9 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Purchases {
+public class Order {
     private Long id;
     private String date;
-    private Long customerId;
-    private List<Long> Items;
+    private Customer customer;
+    private List <Item> itemList;
 }
