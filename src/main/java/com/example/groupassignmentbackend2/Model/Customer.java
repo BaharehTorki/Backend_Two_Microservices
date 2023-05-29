@@ -1,4 +1,4 @@
-package com.example.groupassignmentbackend2.assignment;
+package com.example.groupassignmentbackend2.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,12 +16,12 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long customerId;
     private String name;
-    private String accountNumber;
+    private String ssn;
 
 
-    public Customer(String name, String accountNumber) {
+    public Customer(String name, String ssn) {
         this.name = name;
-        this.accountNumber = accountNumber;
+        this.ssn = ssn;
     }
 
 

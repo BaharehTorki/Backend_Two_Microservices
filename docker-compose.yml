@@ -2,20 +2,31 @@ version: "3"
 services:
   customer-service:
     depends_on:
-      - database-service
+      - db
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./app:/app
-  database-service:
-    image: mysql:latest
+  db:
+    image: mysql
+    restart: always
     environment:
-      - MYSQL_DATABASE=micro-db
-      - MYSQL_USER=micro-user
-      - MYSQL_PASSWORD=micro-password
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=micro_db
+      - MYSQL_USER=micro_user
+      - MYSQL_PASSWORD=micro_password
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3309:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
     volumes:
-      - ./db_data:/var/lib/mysql
+      - my-db:/var/lib/mysql
+# Names our volume
+volumes:
+  my-db:

@@ -1,5 +1,8 @@
-package com.example.groupassignmentbackend2.assignment;
+package com.example.groupassignmentbackend2.assignment.controller;
 
+import com.example.groupassignmentbackend2.Model.Customer;
+import com.example.groupassignmentbackend2.Model.Purchases;
+import com.example.groupassignmentbackend2.assignment.CustomerService;
 import com.example.groupassignmentbackend2.exception.NotFoundCustomerException;
 import com.example.groupassignmentbackend2.exception.NotSavedCustomerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +30,13 @@ public class CustomerController {
         return customerService.findCustomerById(id);
 
     }
-
     @PostMapping("customer/add")
     public Boolean addCustomer(@RequestBody Customer newCustomer) throws NotSavedCustomerException {
         return customerService.saveCustomer(newCustomer);
+    }
+
+    @RequestMapping("customer/{id}/orders")
+    public List<Purchases> getAllOrderByCustomerId(@PathVariable("id") Long id){
+        return customerService.getAllOrdet(id);
     }
 }

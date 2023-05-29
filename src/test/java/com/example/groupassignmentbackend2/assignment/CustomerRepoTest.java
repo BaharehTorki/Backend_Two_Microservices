@@ -1,5 +1,7 @@
 package com.example.groupassignmentbackend2.assignment;
 
+import com.example.groupassignmentbackend2.Model.Customer;
+import com.example.groupassignmentbackend2.assignment.repository.CustomerRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerRepoTest {
 
     public static final String CUSTOMER_NAME = "customer_name_test";
-    public static final String CUSTOMER_ACCOUNT_NUMBER = "customer_account_number";
+    public static final String CUSTOMER_SSN = "customer_ssn";
     public static final String UPDATE_CUSTOMER_NAME = "UPDATE_CUSTOMER_NAME";
-    private final Customer TEST_CUSTOMER = new Customer(CUSTOMER_NAME, CUSTOMER_ACCOUNT_NUMBER);
+    private final Customer TEST_CUSTOMER = new Customer(CUSTOMER_NAME, CUSTOMER_SSN);
 
     private Customer savedCustomer;
     @Autowired
@@ -31,7 +33,7 @@ class CustomerRepoTest {
 
     @AfterEach
     void afterEach() {
-        sut.deleteAllByNameAndAccountNumber(CUSTOMER_NAME, CUSTOMER_ACCOUNT_NUMBER);
+        sut.deleteAllByNameAndSsn(CUSTOMER_NAME, CUSTOMER_SSN);
         System.out.println("================== delete the new Customer before running the test");
     }
 
@@ -47,13 +49,13 @@ class CustomerRepoTest {
         assertNotNull(actualOptional.get());
         Customer actual = actualOptional.get();
         assertEquals(CUSTOMER_NAME, actual.getName());
-        assertEquals(CUSTOMER_ACCOUNT_NUMBER, actual.getAccountNumber());
+        assertEquals(CUSTOMER_SSN, actual.getSsn());
     }
 
     @Test
     void should_find_customer_by_name() {
         //Adding another customer with same property in database to check the functionality
-        sut.save(new Customer(CUSTOMER_NAME, "ANOTHER_CUSTOMER_ACCOUNT_NUMBER"));
+        sut.save(new Customer(CUSTOMER_NAME, "ANOTHER_CUSTOMER_SSN"));
 
         List<Customer> actual = sut.findByName(CUSTOMER_NAME);
         assertNotNull(actual);
@@ -61,10 +63,10 @@ class CustomerRepoTest {
     }
 
     @Test
-    void should_find_customer_by_accountNumber() {
-        sut.save(new Customer("ANOTHER_NAME", CUSTOMER_ACCOUNT_NUMBER));
+    void should_find_customer_by_ssn() {
+        sut.save(new Customer("ANOTHER_NAME", CUSTOMER_SSN));
 
-        List<Customer> actual = sut.findByAccountNumber(CUSTOMER_ACCOUNT_NUMBER);
+        List<Customer> actual = sut.findBySsn(CUSTOMER_SSN);
         assertNotNull(actual);
         assertEquals(2, actual.size());
     }

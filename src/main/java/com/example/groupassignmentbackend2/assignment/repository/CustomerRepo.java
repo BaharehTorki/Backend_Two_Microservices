@@ -1,5 +1,6 @@
-package com.example.groupassignmentbackend2.assignment;
+package com.example.groupassignmentbackend2.assignment.repository;
 
+import com.example.groupassignmentbackend2.Model.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -10,10 +11,10 @@ import java.util.List;
 public interface CustomerRepo extends CrudRepository<Customer, Long> {
 
     List<Customer> findByName(String name);
-    List<Customer> findByAccountNumber(String accountNumber);
+    List<Customer> findBySsn(String ssn);
     List<Customer> findAll();
 
     @Transactional
-    void deleteAllByNameAndAccountNumber(String name, String accountNumber);
+    void deleteAllByNameAndSsn(String name, String ssn);
 
 }
