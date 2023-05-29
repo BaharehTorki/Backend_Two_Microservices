@@ -1,11 +1,11 @@
 package com.example.groupassignmentbackend2.assignment.controller;
 
 import com.example.groupassignmentbackend2.Model.Customer;
-import com.example.groupassignmentbackend2.Model.Order;
+import com.example.groupassignmentbackend2.Model.OrderList;
 import com.example.groupassignmentbackend2.Model.Purchases;
-import com.example.groupassignmentbackend2.service.CustomerService;
 import com.example.groupassignmentbackend2.exception.NotFoundCustomerException;
 import com.example.groupassignmentbackend2.exception.NotSavedCustomerException;
+import com.example.groupassignmentbackend2.service.CustomerService;
 import com.example.groupassignmentbackend2.service.OrderService;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class CustomerController {
     }
 
     @RequestMapping("/{id}/orders")
-    public List<Order> getAllOrderByCustomerId(@PathVariable("id") Long id) {
+    public OrderList getAllOrderByCustomerId(@PathVariable("id") Long id) {
         return orderService.getAllOrdet(id);
     }
 

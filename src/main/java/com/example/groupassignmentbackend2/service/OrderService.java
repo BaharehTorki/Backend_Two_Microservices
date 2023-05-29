@@ -1,6 +1,7 @@
 package com.example.groupassignmentbackend2.service;
 
 import com.example.groupassignmentbackend2.Model.Order;
+import com.example.groupassignmentbackend2.Model.OrderList;
 import com.example.groupassignmentbackend2.Model.Purchases;
 import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,16 @@ public class OrderService {
     private String host;
     @Value("${PURCHASE_BASE_URL}")
     private String baseUrl;
-    public List<Order> getAllOrdet(Long customerID) {
+    public OrderList getAllOrdet(Long customerID) {
         RestTemplate restTemplate = new RestTemplate();
-        Purchases[] objects = restTemplate.getForObject(host.concat(baseUrl).concat(customerID.toString()), Purchases[].class);
-        if (objects != null) {
-            return Arrays.stream(objects).map(this::map).collect(Collectors.toList());
+        Purchases[] purchases = restTemplate.getForObject(host.concat(baseUrl).concat(customerID.toString()), Purchases[].class);
+        if (purchases != null) {
+            return OrderList.builder()
+                    .customer(Arrays.stream(purchases)
+                            .findFirst()
+                            .map(purchase -> customerService.findCustomerById(purchase.getCustomerId()) ).orElse(null))
+                    .orderList(Arrays.stream(purchases).map(this::map).collect(Collectors.toList()))
+                    .build();
         }
         return null;
     }
@@ -40,7 +46,6 @@ public class OrderService {
                 Order.builder()
                         .id(purchases.getId())
                         .date(purchases.getDate())
-                        .customer(customerService.findCustomerById(purchases.getCustomerId()))
                         .itemList(
                                 (Objects.nonNull(purchases.getItems())) ?
                                         purchases.getItems().stream()
