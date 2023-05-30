@@ -1,12 +1,11 @@
-package com.example.groupassignmentbackend2.assignment.controller;
+package se.nackademin.controller;
 
-import com.example.groupassignmentbackend2.Model.Customer;
-import com.example.groupassignmentbackend2.Model.OrderList;
-import com.example.groupassignmentbackend2.Model.Purchases;
-import com.example.groupassignmentbackend2.exception.NotFoundCustomerException;
-import com.example.groupassignmentbackend2.exception.NotSavedCustomerException;
-import com.example.groupassignmentbackend2.service.CustomerService;
-import com.example.groupassignmentbackend2.service.OrderService;
+import se.nackademin.Model.Customer;
+import se.nackademin.Model.OrderList;
+import se.nackademin.Model.Purchases;
+import se.nackademin.exception.NotSavedCustomerException;
+import se.nackademin.service.CustomerService;
+import se.nackademin.service.OrderService;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +26,12 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
-    public List<Customer> getAllCustomers() throws NotFoundCustomerException {
+    public List<Customer> getAllCustomers() {
         return customerService.findAllCustomer();
     }
 
     @RequestMapping("/{id}")
-    public Customer getCustomerById(@PathVariable("id") Long id) throws NotFoundCustomerException {
+    public Customer getCustomerById(@PathVariable("id") Long id) {
         return customerService.findCustomerById(id);
 
     }
@@ -44,14 +43,14 @@ public class CustomerController {
 
     @RequestMapping("/{id}/orders")
     public OrderList getAllOrderByCustomerId(@PathVariable("id") Long id) {
-        return orderService.getAllOrdet(id);
+        return orderService.getAllOrder(id);
     }
 
     @PostMapping("/addOrder")
-    public Response addOrder(@RequestBody Purchases purchases) {
+    public Response addOrder(@RequestBody Purchases purchases)  {
         Response response = new Response();
         try {
-            customerService.addOrder(purchases);
+            orderService.addOrder(purchases);
             response.setStatus(200);
             return response;
         } catch (Exception e) {

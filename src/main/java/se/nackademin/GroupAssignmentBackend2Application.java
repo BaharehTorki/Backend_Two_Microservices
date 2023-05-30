@@ -1,20 +1,16 @@
-package com.example.groupassignmentbackend2;
+package se.nackademin;
 
-import com.example.groupassignmentbackend2.Model.Customer;
-import com.example.groupassignmentbackend2.assignment.repository.CustomerRepo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @Slf4j
 public class GroupAssignmentBackend2Application {
 
     public static void main(String[] args) {
-        log.info("Something");
-        System.out.println("something");
+        log.info("Test from log");
+        System.out.println("Text from System.out");
         SpringApplication.run(GroupAssignmentBackend2Application.class, args);
     }
 

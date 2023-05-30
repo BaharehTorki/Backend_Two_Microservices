@@ -1,12 +1,12 @@
-package com.example.groupassignmentbackend2.exception;
+package se.nackademin.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class NotFoundCustomerException extends Throwable{
+public class UrlException extends Throwable{
 
-    public NotFoundCustomerException(String message){
+    public UrlException(String message){
         super(message);
     }
 

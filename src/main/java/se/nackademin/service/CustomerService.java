@@ -1,21 +1,14 @@
-package com.example.groupassignmentbackend2.service;
+package se.nackademin.service;
 
-import com.example.groupassignmentbackend2.Model.Customer;
-import com.example.groupassignmentbackend2.Model.Purchases;
-import com.example.groupassignmentbackend2.assignment.repository.CustomerRepo;
-import com.example.groupassignmentbackend2.exception.NotFoundCustomerException;
-import com.example.groupassignmentbackend2.exception.NotSavedCustomerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import se.nackademin.Model.Customer;
+import se.nackademin.exception.NotSavedCustomerException;
+import se.nackademin.repository.CustomerRepo;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,22 +16,16 @@ public class CustomerService {
     @Autowired
     private CustomerRepo dao;
 
-    @Value("${PURCHASE_HOST}")
-    private String host;
-    @Value("${PURCHASE_BASE_URL}")
-    private String baseUrl;
-
     public CustomerService(CustomerRepo dao) {
         this.dao = dao;
     }
 
-    public List<Customer> findAllCustomer() throws NotFoundCustomerException {
-        List<Customer> allCustomer = (List<Customer>) dao.findAll();
+    public List<Customer> findAllCustomer() {
+        List<Customer> allCustomer = dao.findAll();
         if (allCustomer.isEmpty()) {
-            throw new NotFoundCustomerException("Customer not found");
-        } else {
-            return allCustomer;
+            log.info("No Customer found!");
         }
+        return allCustomer;
     }
 
     public Boolean saveCustomer(Customer newCustomer) throws NotSavedCustomerException {
@@ -61,9 +48,4 @@ public class CustomerService {
         }
     }
 
-
-    public void addOrder(Purchases purchases) {
-
-
-    }
 }

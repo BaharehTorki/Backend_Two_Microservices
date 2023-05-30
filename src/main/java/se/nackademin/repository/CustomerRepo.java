@@ -1,6 +1,6 @@
-package com.example.groupassignmentbackend2.assignment.repository;
+package se.nackademin.repository;
 
-import com.example.groupassignmentbackend2.Model.Customer;
+import se.nackademin.Model.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

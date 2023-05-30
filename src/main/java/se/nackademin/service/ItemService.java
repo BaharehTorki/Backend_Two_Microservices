@@ -1,6 +1,6 @@
-package com.example.groupassignmentbackend2.service;
+package se.nackademin.service;
 
-import com.example.groupassignmentbackend2.Model.Item;
+import se.nackademin.Model.Item;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

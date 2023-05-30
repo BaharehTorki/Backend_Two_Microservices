@@ -1,4 +1,4 @@
-package com.example.groupassignmentbackend2.Model;
+package se.nackademin.Model;
 
 
 import lombok.AllArgsConstructor;
@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderList {
-    private Customer customer;
-    private List <Order> orderList;
+public class Order {
+    private Long id;
+    private String date;
+    private List <Item> itemList;
 }

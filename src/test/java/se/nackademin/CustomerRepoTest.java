@@ -1,7 +1,7 @@
-package com.example.groupassignmentbackend2.assignment;
+package se.nackademin;
 
-import com.example.groupassignmentbackend2.Model.Customer;
-import com.example.groupassignmentbackend2.assignment.repository.CustomerRepo;
+import se.nackademin.Model.Customer;
+import se.nackademin.repository.CustomerRepo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,6 @@ class CustomerRepoTest {
 
     public static final String CUSTOMER_NAME = "customer_name_test";
     public static final String CUSTOMER_SSN = "customer_ssn";
-    public static final String UPDATE_CUSTOMER_NAME = "UPDATE_CUSTOMER_NAME";
     private final Customer TEST_CUSTOMER = new Customer(CUSTOMER_NAME, CUSTOMER_SSN);
 
     private Customer savedCustomer;

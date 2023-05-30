@@ -1,4 +1,4 @@
-package com.example.groupassignmentbackend2.Model;
+package se.nackademin.Model;
 
 
 import lombok.AllArgsConstructor;
